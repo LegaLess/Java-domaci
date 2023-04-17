@@ -1,0 +1,38 @@
+package skijanje;
+
+public abstract class Deonica {
+	
+	private float duzina;
+	private float nagib;
+	protected char oznaka;
+	
+	public abstract char oznaka();
+	public abstract float ubrzanje();
+	
+	public Deonica(float duzina, float nagib) {
+		this.duzina = duzina;
+		this.nagib = nagib;
+	}
+	
+	public float duzina() {
+		return duzina;
+	}
+	
+	public float nagib() {
+		return nagib;
+	}
+	
+	public float brzina(float pocetnaBrzina) {
+		return (float)Math.sqrt(2 * ubrzanje() * duzina + Math.pow(pocetnaBrzina, 2));
+	}
+	
+	public float vreme(float pocetnaBrzina) {
+		return (brzina(pocetnaBrzina) - pocetnaBrzina) / nagib;
+	}
+	
+	@Override
+	public String toString() {
+		return oznaka + "(" + duzina + "," + nagib + ")";
+	}
+	
+}

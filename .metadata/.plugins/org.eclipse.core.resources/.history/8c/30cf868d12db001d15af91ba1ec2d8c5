@@ -1,0 +1,17 @@
+package skijanje;
+
+public class Teska extends Deonica {
+
+	@Override
+	public char oznaka() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float ubrzanje() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

@@ -1,0 +1,5 @@
+package skijanje;
+
+public abstract class Deonica {
+
+}

@@ -1,0 +1,17 @@
+package defaultPaket;
+
+public class Main {
+
+	
+	public static void main(String args[]) {
+		Osoba o1 = new Osoba("Strahinja", "Tepic");
+		
+		System.out.println(o1);
+		
+		Student s1 = new Student("Pera", "Peric", 2021);
+		
+		System.out.println(s1);
+		
+	}
+	
+}

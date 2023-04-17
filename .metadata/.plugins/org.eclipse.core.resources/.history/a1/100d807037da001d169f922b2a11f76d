@@ -1,0 +1,13 @@
+package defaultPaket;
+
+public class Main {
+
+	
+	public static void main(String args[]) {
+		Osoba o1 = new Osoba("Strahinja", "Tepic");
+		
+		System.out.println(o1);
+		
+	}
+	
+}

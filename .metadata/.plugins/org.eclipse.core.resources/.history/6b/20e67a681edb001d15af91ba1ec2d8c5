@@ -1,0 +1,23 @@
+package skijanje;
+
+public class Teska extends Deonica {
+
+	private final float g = 9.81f;
+	
+	public Teska(float duzina, float nagib) {
+		super(duzina, nagib);
+		
+		oznaka = 'T';
+	}
+	
+	@Override
+	public char oznaka() {
+		return oznaka;
+	}
+
+	@Override
+	public float ubrzanje() {
+		return (float)(g * Math.sin(Math.toRadians(nagib)));
+	}
+
+}

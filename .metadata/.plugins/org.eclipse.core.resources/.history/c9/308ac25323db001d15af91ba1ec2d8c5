@@ -1,0 +1,128 @@
+package skijanje;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
+public class Staza {
+	
+	private List<Deonica> deonice;
+	private String naziv;
+	
+	public Staza(String naziv) {
+		deonice = new ArrayList<Deonica>();
+		this.naziv = naziv;
+	}
+	
+	public void dodaj(Deonica d) {
+		deonice.add(d);
+	}
+	
+	public int broj() {
+		return deonice.size();
+	}
+	
+	//TODO nauciti stream i da vidim kako da ubrzam ovo
+	public double duzina() {
+		double s = 0;
+		
+		for (Deonica deonica : deonice) {
+			s += deonica.duzina;
+		}
+		
+		return s;
+	}
+	
+	public double nagib() {
+		
+		double max = deonice.get(0).nagib;
+		
+		for (int i = 1; i < deonice.size(); i++) {
+			max = deonice.get(i).nagib > max ? deonice.get(0).nagib : max;
+		}
+		
+		return max;
+	}
+	
+	public char oznaka() throws GOznaka {
+		
+		if(deonice.size() == 0) throw new GOznaka();
+		Map<Character, Integer> tabela = new HashMap<Character, Integer>();
+		
+		for (int i = 0; i < deonice.size(); i++) {
+			tabela.putIfAbsent(deonice.get(i).oznaka, Collections.frequency(deonice, deonice.get(i).duzina));
+		}
+		
+		char o = 'T';
+		int max = 0;
+		
+		for (Map.Entry<Character, Integer> entry : tabela.entrySet()) {
+			char key = entry.getKey();
+			int val = entry.getValue();
+			
+			if(val > max) {
+				max = val;
+				o = key;
+			}
+			
+		}
+		
+		return o;
+		
+	}
+	
+	public double brzina(double pocetnaBrzina) {	
+		double brzina = 0;
+		
+		for (int i = 0; i < deonice.size(); i++) {
+			if(i == 0) {
+				brzina = deonice.get(i).brzina(pocetnaBrzina);
+			}
+			else {
+				brzina = deonice.get(i).brzina(brzina);
+			}
+		}
+		
+		return brzina;
+	}
+	
+	public double vreme(double pocetnaBrzina) {
+		double vreme = 0;
+		double brzina = 0;
+		
+		for (int i = 0; i < deonice.size(); i++) {
+			if(i == 0) {
+				vreme += deonice.get(i).vreme(pocetnaBrzina);
+				brzina = deonice.get(i).brzina(pocetnaBrzina);
+			}
+			else {
+				vreme += deonice.get(i).vreme(brzina);
+				brzina = deonice.get(i).brzina(brzina);
+			}
+		}
+		
+		return vreme;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(naziv + "|" + (broj()) + "|" + (duzina()) + "|" + (nagib()) + "\n");
+		
+		if(deonice.size() == 0) sb.append("[]");
+		else {
+			sb.append("[");
+			
+			for (Deonica deonica : deonice) {
+				if(deonice.indexOf(deonica) == broj() - 1) sb.append(deonica.toString() + "]");
+				else sb.append(deonica.toString() + ",");
+			}
+		}
+		
+		return sb.toString();
+	}
+	
+}

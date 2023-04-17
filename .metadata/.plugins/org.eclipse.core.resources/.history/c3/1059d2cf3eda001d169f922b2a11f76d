@@ -1,0 +1,6 @@
+package fakultet;
+
+public enum Zvanje {
+	doc,
+	prof;
+}
